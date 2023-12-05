@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Embedding() {
   
@@ -21,10 +21,6 @@ export default function Embedding() {
     const data = await response.json();
     setResult(data);
   };
-
-  useEffect(() => {
-    console.log(result);
-  }, [result]);
 
   return (
     <div>

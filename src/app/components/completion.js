@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Completion() {
 
@@ -18,10 +18,6 @@ export default function Completion() {
     const data = await response.json();
     setResult(data);
   };
-
-  useEffect(() => {
-    console.log(result);
-  }, [result]);
 
   return (
     <>

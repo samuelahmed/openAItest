@@ -10,11 +10,11 @@ export async function POST(request) {
 
   const result = await openai.images.generate({
     model: "dall-e-2",
+    // dall-e-3 burns too many credits
+    // model: "dall-e-3",
     prompt: input,
   });
 
   console.log("Image Called");
-  console.log(result.data);
-
   return new Response(JSON.stringify({ image: result }), { status: 200 });
 }

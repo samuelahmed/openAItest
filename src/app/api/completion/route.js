@@ -5,6 +5,7 @@ const openai = new OpenAI({
 });
 
 export async function POST(request) {
+
   const { content } = await request.json();
 
   const completion = await openai.chat.completions.create({
@@ -12,6 +13,6 @@ export async function POST(request) {
     model: "gpt-3.5-turbo",
   });
 
-  console.log("Completion Called", completion);
+  console.log("Completion Called");
   return new Response(JSON.stringify(completion), { status: 200 });
 }
