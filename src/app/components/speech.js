@@ -6,7 +6,7 @@ export default function Speech() {
 
   const audioRef = useRef();
   const [clientContent, setClientContent] = useState("Input text to see full API response");
-  const [voice, setVoice] = useState("");
+  const [voice, setVoice] = useState("alloy");
   const voiceList = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"];
 
   const fetchData = async () => {
