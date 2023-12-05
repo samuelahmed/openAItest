@@ -8,13 +8,13 @@ export async function POST(request) {
     
   const { input } = await request.json();
 
-  const image = await openai.images.generate({
+  const result = await openai.images.generate({
     model: "dall-e-2",
     prompt: input,
   });
 
   console.log("Image Called");
-  console.log(image.data);
+  console.log(result.data);
 
-  return new Response(JSON.stringify({ image }), { status: 200 });
+  return new Response(JSON.stringify({ image: result }), { status: 200 });
 }

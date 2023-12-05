@@ -21,6 +21,7 @@ export default function ImageC() {
     setResult(data);
   };
 
+
   useEffect(() => {
     console.log(result);
   }, [result]);
@@ -28,7 +29,7 @@ export default function ImageC() {
   return (
     <>
       <div className="flex flex-col space-y-2">
-        <h1 className="text-3xl font-bold">Image ()</h1>
+        <h1 className="text-3xl font-bold">Image (dall-e-3)</h1>
         <input
           type="text"
           value={clientContent}
