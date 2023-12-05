@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export default function Result() {
+export default function Embedding() {
   const [result, setResult] = useState("");
 
   useEffect(() => {
