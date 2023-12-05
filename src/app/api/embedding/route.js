@@ -4,9 +4,9 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function GET() {
+export async function POST(request) {
 
-  const input = "The quick brown fox jumped over the lazy dog";
+  const { input } = await request.json();
 
   const embedding = await openai.embeddings.create({
     model: "text-embedding-ada-002",
