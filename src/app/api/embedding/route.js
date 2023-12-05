@@ -14,6 +14,7 @@ export async function GET() {
     encoding_format: "float",
   });
 
+  console.log('Embedding Called');
   return new Response(JSON.stringify({ input, embedding }), { status: 200 });
 }
 
