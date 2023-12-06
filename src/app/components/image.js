@@ -3,13 +3,15 @@
 import { useState } from "react";
 
 export default function ImageC() {
-
+  
   const [result, setResult] = useState("");
   const [clientContent, setClientContent] = useState(
     "Input text to see full API response"
   );
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
+    setIsLoading(true);
     const response = await fetch("/api/image", {
       method: "POST",
       headers: {
@@ -19,6 +21,7 @@ export default function ImageC() {
     });
     const data = await response.json();
     setResult(data);
+    setIsLoading(false);
   };
 
   return (
@@ -31,10 +34,13 @@ export default function ImageC() {
           onChange={(e) => setClientContent(e.target.value)}
         />
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className={`font-bold py-2 px-4 rounded ${
+            isLoading ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"
+          } text-white`}
           onClick={fetchData}
+          disabled={isLoading}
         >
-          Fetch Data
+          {isLoading ? "Loading..." : "Fetch Result"}
         </button>
       </div>
       <pre className="overflow-auto max-w-7xl">

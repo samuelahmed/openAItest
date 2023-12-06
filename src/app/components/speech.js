@@ -3,13 +3,18 @@
 import { useState, useRef } from "react";
 
 export default function Speech() {
-
+  
   const audioRef = useRef();
-  const [clientContent, setClientContent] = useState("Input text to see full API response");
+  const [clientContent, setClientContent] = useState(
+    "Input text to see full API response"
+  );
   const [voice, setVoice] = useState("alloy");
+  const [isLoading, setIsLoading] = useState(false);
+
   const voiceList = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"];
 
   const fetchData = async () => {
+    setIsLoading(true);
     const response = await fetch("/api/speech", {
       method: "POST",
       headers: {
@@ -20,6 +25,7 @@ export default function Speech() {
     const blob = await response.blob();
     const url = URL.createObjectURL(blob);
     audioRef.current.src = url;
+    setIsLoading(false);
   };
 
   return (
@@ -32,10 +38,13 @@ export default function Speech() {
           onChange={(e) => setClientContent(e.target.value)}
         />
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className={`font-bold py-2 px-4 rounded ${
+            isLoading ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"
+          } text-white`}
           onClick={fetchData}
+          disabled={isLoading}
         >
-          Fetch Data
+          {isLoading ? "Loading..." : "Fetch Result"}
         </button>
         <select onChange={(e) => setVoice(e.target.value)}>
           {voiceList.map((voice) => (
