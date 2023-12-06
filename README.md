@@ -1,4 +1,4 @@
-Super simple APIs calling openAI models in javascript in a next14 app. 
+Super simple APIs calling openAI models in a barebones nextjs14 app. 
 
 It is deployed and you can use within reason, but please don't wreck my free credits :) 
 
