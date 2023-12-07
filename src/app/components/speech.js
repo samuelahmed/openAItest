@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 
 export default function Speech() {
-  
   const audioRef = useRef();
   const [clientContent, setClientContent] = useState(
     "Input text to see full API response"
@@ -15,17 +14,22 @@ export default function Speech() {
 
   const fetchData = async () => {
     setIsLoading(true);
-    const response = await fetch("/api/speech", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ content: clientContent, voice: voice }),
-    });
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    audioRef.current.src = url;
-    setIsLoading(false);
+    try {
+      const response = await fetch("/api/speech", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: clientContent, voice: voice }),
+      });
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      audioRef.current.src = url;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

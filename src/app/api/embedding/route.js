@@ -1,5 +1,8 @@
 import OpenAI from "openai";
 
+//increase timeout to 25s instead of 10s
+export const runtime = 'edge'; 
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });

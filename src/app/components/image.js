@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 export default function ImageC() {
-  
   const [result, setResult] = useState("");
   const [clientContent, setClientContent] = useState(
     "Input text to see full API response"
@@ -12,16 +11,21 @@ export default function ImageC() {
 
   const fetchData = async () => {
     setIsLoading(true);
-    const response = await fetch("/api/image", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ input: clientContent }),
-    });
-    const data = await response.json();
-    setResult(data);
-    setIsLoading(false);
+    try {
+      const response = await fetch("/api/image", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ input: clientContent }),
+      });
+      const data = await response.json();
+      setResult(data);
+    } catch (error) {
+      setResult({ error: error.message });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

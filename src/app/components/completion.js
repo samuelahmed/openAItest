@@ -27,7 +27,7 @@ export default function Completion() {
       setIsLoading(false);
     }
   };
-  
+
   return (
     <>
       <div className="flex flex-col space-y-2">
