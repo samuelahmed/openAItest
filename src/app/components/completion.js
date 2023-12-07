@@ -11,18 +11,23 @@ export default function Completion() {
 
   const fetchData = async () => {
     setIsLoading(true);
-    const response = await fetch("/api/completion", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ content: clientContent }),
-    });
-    const data = await response.json();
-    setResult(data);
-    setIsLoading(false);
+    try {
+      const response = await fetch("/api/completion", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: clientContent }),
+      });
+      const data = await response.json();
+      setResult(data);
+    } catch (error) {
+      setResult({ error: error.message });
+    } finally {
+      setIsLoading(false);
+    }
   };
-
+  
   return (
     <>
       <div className="flex flex-col space-y-2">
